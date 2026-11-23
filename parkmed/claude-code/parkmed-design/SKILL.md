@@ -1,6 +1,6 @@
 ---
 name: parkmed-design
-description: Design Parkmed app screens with Kalka and get them ready for APEX - start from the Parkmed starter document, draft screens into the running Kalka app through its MCP tools, import Claude Design projects, run the Parkmed check (spacing, radius, type, colours, positioning) and fix what it can, then hand screens marked ready to the apex-build skill. Use when the user wants to design, tidy, check or hand off a Parkmed screen, mentions Kalka, Claude Design imports, spacing or positioning problems in a design, or asks to build the screens marked ready in Kalka.
+description: Design Parkmed app screens (and GARO screens, with GARO's rules) with Kalka and get them ready for APEX - start from the Parkmed starter document, draft screens into the running Kalka app through its MCP tools, import Claude Design projects, run the Parkmed check (spacing, radius, type, colours, positioning) and fix what it can, then hand screens marked ready to the apex-build skill. Use when the user wants to design, tidy, check or hand off a Parkmed screen, mentions Kalka, Claude Design imports, spacing or positioning problems in a design, or asks to build the screens marked ready in Kalka.
 ---
 
 # Parkmed design with Kalka
@@ -18,7 +18,12 @@ finishing, keep every value on the Parkmed look, and turn finished screens into 
   variables, the shared classes (styles.css), three artboards (Orders list, New order form,
   Components) and the agent instructions (rules, `/parkmed-screen`, `/parkmed-tidy`,
   `/parkmed-handoff`, Parkmed `/polish` and `/direction`).
-- **The values**: `parkmed/parkmed-values.json`. Every rule below comes from it.
+- **The values**: `parkmed/parkmed-values.json` (Parkmed apps) and `parkmed/garo-values.json`
+  (GARO). Every rule below comes from them. Both looks space in multiples of 4 (4, 8, 12, 16, 20,
+  24, 32, 40, 48, 64).
+- **GARO**: its design system is in GARO's repository,
+  `docs/design/garo-look/design-system/kalka/GARO Design System/`. For a GARO screen, start from
+  it instead of the Parkmed starter, and add `--look garo` to every check below.
 - **Kalka's MCP server**: connected from Kalka, Settings → MCP → Claude Code. Its tools are
   `kalka` tools (get_page_tree, write_html, get_css_classes, update_styles, set_layout,
   get_screenshot, set_frame_review, get_frame_reviews…).
@@ -69,6 +74,6 @@ When the person says a screen is finished, they mark it ready for development in
 ## Never
 
 - Never edit `parkmed/starter` in place for a project; copy it.
-- Never run Kalka's `lint_fix` with suggestions on a Parkmed design: its spacing scale is
-  4-based and would move the Parkmed 6, 10 and 14.
+- Never run Kalka's `lint_fix` with suggestions on a Parkmed or GARO design: its radius scale is
+  not theirs, and its other suggestions delete and resize layers. Use `bun parkmed/check.ts --fix`.
 - Never use teal, a new colour, or a font size above 24.

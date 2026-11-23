@@ -30,9 +30,11 @@ Each part carries its Parkmed class. The builder maps them to the APEX styleshee
 A part with no class is new: name it and write a note on the artboard saying what it does.
 
 Groups such as "Head and filters" and "Count and table" exist only to carry spacing, because
-Kalka has no margins. In APEX their children are siblings spaced by the stylesheet (18 between
-regions, `.inline-form`'s margin-top, `.grid-meta`'s and `.pager`'s negative margins): the
-builder drops these groups.
+Kalka has no margins. In APEX their children are siblings and the builder drops these groups. The
+design's spaces (16 between regions, 24 under the page head, 8 above and below a table) are on
+the 4 scale; the app's stylesheet may still write its older 18, 10 and 28 there. Build the page
+with the stylesheet as it is, and move that screen's spaces to the scale in the same work only
+when the owner's rule for that app says so (GARO's way: a screen's spaces move when it is changed).
 
 ## 3. States
 

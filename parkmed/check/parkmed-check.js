@@ -1,6 +1,6 @@
 // Parkmed design check. Runs inside `kalka eval` (Figma plugin API), on a saved file or on the
 // document open in the Kalka app. The runner (parkmed/check.ts) puts three constants before it:
-//   V     the Parkmed values (parkmed/parkmed-values.json)
+//   V     the look's values (parkmed/parkmed-values.json, or garo-values.json with --look garo)
 //   FIX   true to snap spacing, radius and near-palette colours; false to only report
 //   ONLY  an artboard name to check alone, or '' for every artboard
 // It returns { pages, artboards, layers, issues, fixed }.
@@ -93,23 +93,16 @@ function checkSpacing(node, context) {
   if (!('layoutMode' in node) || node.layoutMode === 'NONE') return
   const props =
     node.layoutWrap === 'WRAP' ? [...SPACING_PROPS, 'counterAxisSpacing'] : SPACING_PROPS
-  // A control is at most two levels deep: it holds text, icons, or boxes that hold only those (a
-  // button, a badge, a note; a field with its label, box and message). It may also use the odd
-  // steps the stylesheet's control classes write. Layout boxes keep to the even steps.
-  const isLeaf = (child) => child.type === 'TEXT' || SHAPES.has(child.type)
-  const isControl = node.children.every(
-    (child) => isLeaf(child) || ('children' in child && child.children.every(isLeaf))
-  )
-  const allowed = isControl ? [...V.spacing.layout, ...V.spacing.controlsAlso] : V.spacing.layout
+  // Every padding and gap is a multiple of the look's base (4 for Parkmed and GARO); 0 is no space.
+  const onScale = (value) => value % V.spacing.base === 0
   for (const prop of props) {
     const value = node[prop]
-    if (!isNumber(value) || value === 0 || allowed.includes(round(value))) continue
+    if (!isNumber(value) || value === 0 || onScale(round(value))) continue
     const to = nearest(Math.max(value, 0), V.spacing.snapTo)
     const issue = {
       kind: 'spacing',
       severity: 'warning',
       prop: SPACING_NAMES[prop] ?? prop,
-      box: isControl ? 'control' : 'layout',
       value: round(value),
       expected: neighbours(value, V.spacing.snapTo),
       fix: to
@@ -130,6 +123,9 @@ function checkRadius(node, context) {
       ? ['topLeftRadius', 'topRightRadius', 'bottomRightRadius', 'bottomLeftRadius']
       : ['cornerRadius']
   const shortSide = Math.min(node.width || 0, node.height || 0)
+  // A mark (a dot, a tick, an icon) keeps its own radius where the look says so (GARO: 64 px or smaller).
+  const mark = V.radius.marksUpTo
+  if (mark && node.width > 0 && node.width <= mark && node.height > 0 && node.height <= mark) return
   for (const prop of corners) {
     const value = node[prop]
     if (!isNumber(value) || value === 0 || V.radius.allowed.includes(round(value))) continue
@@ -180,20 +176,20 @@ function checkPaints(node, context, key) {
     if (PALETTE.includes(hex)) return paint
     const what = key === 'fills' ? (node.type === 'TEXT' ? 'text colour' : 'fill') : 'stroke'
     if (isTeal(hex)) {
-      // As parkmed_look.py does: teal becomes Parkmed blue, the colour of actions and selection.
+      // As parkmed_look.py does: teal becomes the look's action colour (Parkmed blue; GARO's forest accent).
       const issue = {
         kind: 'colour',
         severity: 'error',
         prop: what,
         value: hex,
-        expected: ['no teal: Parkmed blue #2a62a9'],
-        fix: V.colors.tokens.accent
+        expected: [`no teal: ${V.colors.tealTo}`],
+        fix: V.colors.tealTo
       }
       if (!FIX) {
         report(context, node, issue)
         return paint
       }
-      const [r, g, b] = rgbOf(V.colors.tokens.accent).map((channel) => channel / 255)
+      const [r, g, b] = rgbOf(V.colors.tealTo).map((channel) => channel / 255)
       changed = true
       issue.fixed = true
       fixed++

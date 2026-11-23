@@ -31,12 +31,11 @@ Write three lines, then draw:
 
 ## 3. Numbers
 
-- Spacing: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 40; inside a control also 5, 7, 9, 11.
-  Between regions of the content 18; the filter panel 28 under the page head (group the two);
-  the count line 8 above the table and the pager 10 below it; inside the page head 6; between
-  buttons 8.
+- Spacing: multiples of 4 only, from 4, 8, 12, 16, 20, 24, 32, 40, 48, 64. Between regions of the content 16; the filter
+  panel 24 under the page head (group the two); the count line 8 above the table and the pager 8
+  below it; inside the page head 4; between buttons 8; label to box 4.
 - Type: 24/600 page title, 18/600 card title, 14 body, 12 labels and table headers.
-- Corners: 4 controls, 6 cards. Rows 35px; cells 7 x 10.
+- Corners: 4 controls, 6 cards. Rows 36px; cells 8 x 12; buttons 8 x 12; fields 8 x 12.
 
 ## 4. Never
 

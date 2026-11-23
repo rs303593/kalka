@@ -19,20 +19,20 @@ A mistake that repeats has one cause: fix it in the class or the variable, not l
 
 ## 2. Space
 
-- Every gap and padding is a Parkmed step: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 40 (18 only
-  as a card's padding). Inside a button, field, badge or note also 5, 7, 9, 11.
-- Regions of the content are 18 apart; the filter panel 28 under the page head; the count line
-  8 above its table and the pager 10 below it; the page head's title and line 6; buttons in a row 8;
-  fields in a form 14 down and 16 across; label to box 5.
+- Every gap and padding is a multiple of 4, from the scale 4, 8, 12, 16, 20, 24, 32, 40, 48, 64 (as GARO's). Lines of 1 to
+  3 px are strokes, not spaces.
+- Regions of the content are 16 apart; the filter panel 24 under the page head; the count line
+  8 above its table and the pager 8 below it; the page head's title and line 4; buttons in a row 8;
+  fields in a form 12 down and 16 across; label to box 4.
 - Space inside a group is smaller than space between groups.
-- The same relation has the same value everywhere: every card the same padding (18), every
-  filter bar 12.
+- The same relation has the same value everywhere: every card the same padding (16), every
+  filter panel 12.
 - Every box is auto layout. No x/y placement, no absolute positioning, no groups.
 
 ## 3. Alignment
 
 - Edges that should line up do, to the pixel. No sizes like 13.5.
-- Table cells line up with their header cell: same width, same 10px side padding. Numbers are
+- Table cells line up with their header cell: same width, same 12px side padding. Numbers are
   right-aligned.
 - Labels sit on the left edge of their box.
 

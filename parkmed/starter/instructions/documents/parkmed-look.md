@@ -31,10 +31,12 @@ text 12. Table header 12/500 muted.
 
 ## Spacing and shape
 
-Even steps, no single 4px base: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 40. Controls also use
-5, 7, 9, 11 inside (button 7 x 12, field 7 x 10, note 11 x 14, field label to box 5). Regions of
-the content 18 apart; the filter panel 28 under the page head; the count line 8 above a table and
-the pager 10 below it; content padding 24; page head gap 20; card padding 18; filter panel 12.
+Every padding and gap a multiple of 4, from GARO's scale 4, 8, 12, 16, 20, 24, 32, 40, 48, 64 (the owner, 23 Nov 2026:
+"Change the spacing themes to multiples of 4 for both parkmed like Garo"). Button 8 x 12, field 8 x 12,
+note 12 x 16, label to box 4. Regions of the content 16 apart; the filter panel 24 under the page
+head; the count line 8 above a table and the pager 8 below it; content padding 24; page head gap
+20; card padding 16; filter panel 12. The live apps' stylesheets still write 6, 10 and 14 in
+places: a screen moves to the scale when it is next built or changed.
 Corners 4 (controls), 6 (cards, panels), pills for count badges and the current menu item.
 
 ## The shell
@@ -46,7 +48,7 @@ for the current page, the signed-in person's name and role at the bottom. No foo
 ## Long lists
 
 Any list that can pass about 50 rows: a dense table, pages of 50, the count above ("51–100 of
-401 items") and the pager below. Rows 35px (one line) or 52px (two); cells 7 x 10; numbers
+401 items") and the pager below. Rows 36px (one line) or 52px (two), the header row 34; cells 8 x 12; fields 37 tall, buttons 36 (heights, not spaces); numbers
 right-aligned; codes in Menlo 12 (600 when the code is the row's link); name first, code after. A row opens its record full width with
 Back to list, "12 of 401", Previous and Next. Long option lists are typed (a field with
 suggestions), not dropped down.

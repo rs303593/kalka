@@ -13,8 +13,8 @@ Take an image (get_screenshot). Read the tree (get_page_tree) and list, by layer
 - gaps and paddings that are not Parkmed steps (below);
 - corners, font sizes and colours that are not Parkmed values.
 
-`lint` helps with structure, but its spacing scale is 4-based: ignore its spacing and radius
-suggestions and never run lint_fix with suggestions here.
+`lint` helps with structure. Its spacing scale is 4-based like Parkmed's, but its radius scale is not
+and its other suggestions delete and resize layers: never run lint_fix with suggestions here.
 
 ## 2. Structure first
 
@@ -33,8 +33,8 @@ Take an image after each top-level frame. If the screen no longer reads the same
 
 ## 3. Then the numbers
 
-- Spacing: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 40; inside a control (a box holding only
-  text) also 5, 7, 9, 11. Snap anything else to the nearest step, the smaller on a tie.
+- Spacing: multiples of 4, from 4, 8, 12, 16, 20, 24, 32, 40, 48, 64. Snap anything else to the nearest step, the smaller
+  on a tie.
 - Corners: 0, 2, 3, 4, 6, or a pill. Font sizes: 24, 18, 16, 14, 12 (13 and 11 for small detail).
 - Colours: the variables (Parkmed tokens). A colour within a shade of a token becomes the token;
   teal becomes Parkmed blue #2A62A9; anything else, ask.

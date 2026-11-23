@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
- * Parkmed design check: spacing, corner radius, type sizes, colours and positioning against the
- * Parkmed values (parkmed/parkmed-values.json), on a saved Kalka folder or .fig, or live on the
- * document open in the Kalka app.
+ * Parkmed design check: spacing, corner radius, type sizes, colours and positioning against a look's
+ * values (parkmed/parkmed-values.json; with --look garo, parkmed/garo-values.json), on a saved Kalka
+ * folder or .fig, or live on the document open in the Kalka app.
  *
  *   bun parkmed/check.ts <folder or .fig>                 report only
  *   bun parkmed/check.ts <folder or .fig> --fix -o <copy> snap spacing, radius and colours into a copy
@@ -10,7 +10,8 @@
  *   bun parkmed/check.ts --app                            the document open in Kalka
  *   bun parkmed/check.ts --app --fix                      fix it live (undo: bun kalka undo)
  *
- * Options: --artboard "<name>" checks one artboard; --json prints the raw result.
+ * Options: --look parkmed (the default) or garo; --artboard "<name>" checks one artboard; --json
+ * prints the raw result.
  * It runs through `kalka eval`, so it uses the Figma plugin API and touches no Kalka internals.
  */
 import { cpSync, existsSync, rmSync, statSync } from 'node:fs'
@@ -53,8 +54,8 @@ function usage(message?: string): never {
   console.error(
     [
       'Usage:',
-      '  bun parkmed/check.ts <folder or .fig> [--fix -o <copy> | --fix --write] [--artboard "<name>"] [--json]',
-      '  bun parkmed/check.ts --app [--fix] [--artboard "<name>"] [--json]'
+      '  bun parkmed/check.ts <folder or .fig> [--fix -o <copy> | --fix --write] [--look parkmed|garo] [--artboard "<name>"] [--json]',
+      '  bun parkmed/check.ts --app [--fix] [--look parkmed|garo] [--artboard "<name>"] [--json]'
     ].join('\n')
   )
   process.exit(2)
@@ -68,6 +69,7 @@ interface Options {
   output: string
   artboard: string
   json: boolean
+  look: string
 }
 
 function parseArgs(argv: string[]): Options {
@@ -83,6 +85,7 @@ function parseArgs(argv: string[]): Options {
         json: { type: 'boolean', default: false },
         output: { type: 'string', short: 'o', default: '' },
         artboard: { type: 'string', default: '' },
+        look: { type: 'string', default: 'parkmed' },
         help: { type: 'boolean', short: 'h', default: false }
       }
     })
@@ -97,7 +100,10 @@ function parseArgs(argv: string[]): Options {
   return options
 }
 
+const LOOKS: Record<string, string> = { parkmed: 'parkmed-values.json', garo: 'garo-values.json' }
+
 function validate(options: Options) {
+  if (!(options.look in LOOKS)) usage(`--look is parkmed or garo, not ${options.look}`)
   if (options.app === (options.file !== '')) usage('give a folder or .fig, or --app, not both')
   if (options.file && options.fix && !options.write && !options.output)
     usage('--fix on a file needs -o <copy>, or --write to change it in place')
@@ -141,7 +147,7 @@ async function kalka(args: string[], stdin?: string): Promise<string> {
 }
 
 async function run(options: Options): Promise<Result> {
-  const values = await Bun.file(join(HERE, 'parkmed-values.json')).text()
+  const values = await Bun.file(join(HERE, LOOKS[options.look] ?? 'parkmed-values.json')).text()
   const body = await Bun.file(join(HERE, 'check', 'parkmed-check.js')).text()
   const code = [
     `const V = ${values.trim()}`,
@@ -190,11 +196,11 @@ function copyInstructions(from: string, to: string) {
   if (isFolder(source)) cpSync(source, join(to, 'instructions'), { recursive: true })
 }
 
-function describe(issue: Issue): string {
+function describe(issue: Issue, look: string): string {
   const expected = issue.expected.join(' or ')
   switch (issue.kind) {
     case 'spacing':
-      return `${issue.prop} ${issue.value}px → Parkmed step ${expected}`
+      return `${issue.prop} ${issue.value}px → ${look} step ${expected}`
     case 'radius':
       return `${issue.prop} ${issue.value}px → ${expected}`
     case 'type':
@@ -202,17 +208,18 @@ function describe(issue: Issue): string {
     case 'colour':
       return issue.severity === 'error'
         ? `${issue.prop} ${issue.value} is teal → ${expected}`
-        : `${issue.prop} ${issue.value} is not a Parkmed colour → nearest ${expected}`
+        : `${issue.prop} ${issue.value} is not a ${look} colour → nearest ${expected}`
     case 'position':
       return `${issue.value} → ${expected}`
   }
 }
 
 function print(result: Result, options: Options) {
+  const look = options.look === 'garo' ? 'GARO' : 'Parkmed'
   const open = result.issues.filter((issue) => !issue.fixed)
   const where = options.app ? 'the open document' : options.file
   console.log(
-    `Parkmed check · ${where} · ${result.artboards} artboards · ${result.layers} layers · ` +
+    `${look} check · ${where} · ${result.artboards} artboards · ${result.layers} layers · ` +
       `${open.length} to look at${result.fixed ? ` · ${result.fixed} fixed` : ''}\n`
   )
   const byArtboard = Map.groupBy(result.issues, (issue) => `${issue.page} › ${issue.artboard}`)
@@ -221,7 +228,7 @@ function print(result: Result, options: Options) {
     for (const issue of issues) {
       const mark = issue.fixed ? 'fixed  ' : issue.severity.padEnd(7)
       const layer = issue.path.split(' / ').slice(-2).join(' / ')
-      console.log(`  ${mark}  ${issue.kind.padEnd(8)} ${describe(issue)}   [${layer}]`)
+      console.log(`  ${mark}  ${issue.kind.padEnd(8)} ${describe(issue, look)}   [${layer}]`)
     }
     console.log('')
   }
@@ -230,7 +237,7 @@ function print(result: Result, options: Options) {
     .join(', ')
   if (open.length === 0) {
     console.log(
-      'Clean: every spacing, radius, type size and colour is a Parkmed value, and nothing is placed by hand.'
+      `Clean: every spacing, radius, type size and colour is a ${look} value, and nothing is placed by hand.`
     )
     return
   }
@@ -238,7 +245,7 @@ function print(result: Result, options: Options) {
   const fixable = open.filter((issue) => issue.fix !== undefined).length
   if (fixable > 0 && !options.fix)
     console.log(
-      `${fixable} can be fixed with --fix (spacing, radius, near-Parkmed colours, teal to Parkmed blue).`
+      `${fixable} can be fixed with --fix (spacing, radius, near-${look} colours, teal to the ${look} action colour).`
     )
   if (open.some((issue) => issue.fix === undefined))
     console.log(

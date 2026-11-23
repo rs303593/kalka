@@ -8,21 +8,23 @@ keep taking Kalka's updates.
 | What | Where | What it does |
 |---|---|---|
 | Parkmed starter | `starter/` | A Kalka document with the Parkmed colours, spacing and type as variables, the Parkmed classes (button, field, table, page head…), three artboards (a list, a form, the components) and instructions for Kalka's agent |
-| Parkmed check | `check.ts` | Lists every spacing, corner, font size and colour that is not a Parkmed value, and every layer placed by x/y; `--fix` snaps what has one right answer |
+| Parkmed check | `check.ts` | Lists every spacing, corner, font size and colour that is not a Parkmed value (or a GARO one, with `--look garo`), and every layer placed by x/y; `--fix` snaps what has one right answer |
 | Agent skills | `starter/instructions/skills/` | `/parkmed-screen`, `/parkmed-tidy`, `/parkmed-handoff`, and Parkmed versions of Kalka's `/polish` and `/direction` |
 | Claude Code skill | `claude-code/parkmed-design/` | The same loop for Claude Code in the terminal, ending in the apex-build skill |
-| The values | `parkmed-values.json` | One source for all of the above, counted from the Parkmed APEX stylesheet |
+| The values | `parkmed-values.json`, `garo-values.json` | One source for each look: Parkmed's from the Parkmed APEX stylesheet, GARO's from GARO's `garo-themes.css` and design.md |
 
 ## Why drafts come out with spacing and positioning problems
 
 - **Values typed per layer.** A draft writes 13, 17, 19 and 37 because nothing tells it the
-  scale. Here every element comes from a shared class, and the check lists anything else.
+  scale. Here every element comes from a shared class, every space is a multiple of 4, and the
+  check lists anything else.
 - **Layers placed by x/y.** A draft places text at left 22, top 23. It looks right until
   something moves. Here every box is auto layout (flex) with a gap, and the check lists any frame
   that is not.
-- **The wrong scale.** Kalka's own `/polish` and `lint_fix` use a 4px scale (4, 8, 12, 16) and
-  would push your 6, 10 and 14 away. Parkmed's stylesheet has no single 4px base, so the starter
-  replaces `/polish` with a Parkmed one and the check uses your values.
+- **No shared scale.** Parkmed and GARO now share one: every padding and gap a multiple of 4,
+  from 4, 8, 12, 16, 20, 24, 32, 40, 48, 64 (the owner, 23 Nov 2026, as GARO's of 8 Nov). The
+  starter's own `/polish` carries it with the Parkmed colours and type, which Kalka's built-in one
+  does not know.
 
 ## Set up once (on your Mac)
 
@@ -65,8 +67,8 @@ keep taking Kalka's updates.
    applies the Parkmed classes. Anything you dislike: Cmd+Z in Kalka, or `bun kalka undo`.
 4. **Finish by hand.** Tips that keep it clean:
    - Change a class, not a layer: Assets → Classes, edit `.btn` and every button follows.
-   - Space with the gap and padding fields of auto layout, never by dragging. Use 4, 6, 8, 10,
-     12, 14, 16, 20, 24.
+   - Space with the gap and padding fields of auto layout, never by dragging. Use 4, 8, 12, 16,
+     20, 24, 32, 40.
    - Copy pieces from the **Components** artboard instead of drawing new ones.
 5. **Check.** When it says Clean, the spacing, corners, type and colours are all Parkmed:
    ```bash
@@ -84,17 +86,17 @@ keep taking Kalka's updates.
 | `bun parkmed/check.ts --app --fix` | Fix it live: spacing, corners, near colours, teal to Parkmed blue |
 | `bun parkmed/check.ts <folder>` | Check a saved Kalka folder (or a `.fig`) |
 | `bun parkmed/check.ts <folder> --fix -o <new folder>` | Write a fixed copy; the original is untouched |
+| `--look garo` | GARO's rules instead of Parkmed's (with any of the above) |
 | `--artboard "Orders"` | Only that artboard |
 
-Try it on the sample: `bun parkmed/check.ts parkmed/samples/messy-draft` lists 36 problems;
-`--fix -o /tmp/fixed` fixes 25 of them and leaves the 11 that need a decision (the header
+Try it on the sample: `bun parkmed/check.ts parkmed/samples/messy-draft` lists 42 problems;
+`--fix -o /tmp/fixed` fixes 31 of them and leaves the 11 that need a decision (the header
 placed by x/y, nine font sizes, one red).
 
 ## What the check accepts
 
-- **Spacing:** 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 40, 60. Inside a control (a box
-  that holds only text, or a field: label, box, message) also 3, 5, 7, 9, 11, the values the
-  button, field and note classes use.
+- **Spacing:** any multiple of 4. `--fix` snaps to the nearest of 4, 8, 12, 16, 20, 24, 32, 40,
+  48, 64, the smaller on a tie (6 to 4, 10 to 8, 14 to 12).
 - **Corners:** 0, 2, 3, 4, 6, or a pill.
 - **Font sizes:** 24, 18, 16, 14, 12, and the stylesheet's detail sizes 22, 20, 13, 11, 11.5,
   10.5, 10.
@@ -103,14 +105,38 @@ placed by x/y, nine font sizes, one red).
 - **Positioning:** a frame with two or more layers needs auto layout; no absolute positioning
   inside auto layout; no groups.
 
-To change a rule, change `parkmed-values.json` (and the same value in `starter/styles.css` and
-`starter/instructions/rules.md`).
+To change a rule, change it in all three places: `parkmed-values.json` (what the check accepts),
+`starter/styles.css` (the classes) and `starter/instructions/rules.md` (what agents are told).
+
+**The live Parkmed apps are not changed by this.** Their stylesheets (the apex-build skill's
+starter CSS and each app's own) still write 6, 10 and 14 in places, so a design on the scale and
+the page built from it can differ by 2 px until that screen's spaces move. GARO did the same on 8
+Nov: older spaces move when their screen is next built or changed, and a check keeps new ones out.
+
+## GARO
+
+GARO's design system is in GARO's repository, made by the core team:
+`docs/design/garo-look/design-system/kalka/GARO Design System/` (6 pages, 34 artboards). Open it in
+Kalka (File → Open, the folder or its zip), copy its components into your screen, and check with
+GARO's rules:
+
+```bash
+bun parkmed/check.ts --app --look garo
+```
+
+It checks spacing in multiples of 4, GARO's type sizes, its corners (marks of 64 px or smaller
+keep their own), and colours only from palette A's roles. On the design system itself (23 Nov
+2026) it found 268 older spaces (6, 14, 10…, which GARO's own `space_baseline.json` tracks), 167
+frames Kalka's import placed by x/y (GARO's CSS grid and tables), 7 corners and 6 mixed colours;
+`--fix` fixed 315 values live. Three import problems are with the core team (GARO R-150): the
+menu artboards come in blank, the dark mode is missing, and Barlow Condensed is not saved.
 
 ## Known limits
 
-- Tested here on saved files: the check, the fix, and opening and saving the starter through
-  Kalka's own reader and writer. **Not yet tried in the desktop app:** `--app` mode, the agent
-  skills, the Claude Design import, and pasting between documents. Try them on a copy first.
+- Tested here: the check and the fix on saved files; opening and saving the starter through
+  Kalka's own reader and writer; the Claude Design import, `--app` and `--app --fix` in Kalka's
+  web editor (with GARO's design system open). **Not yet tried in the desktop app:** the agent
+  skills and pasting between documents. Try them on a copy first.
 - Kalka keeps only the first font of a list: the starter uses `system-ui` (SF on a Mac) and
   Menlo for codes. Where Kalka cannot find a font it shows Inter.
 - Kalka does not keep tabular figures or underlines, and keeps a border only on all four sides;

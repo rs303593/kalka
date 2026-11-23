@@ -1,10 +1,9 @@
 {
-  "about": "The Parkmed look as numbers. Counted from the Parkmed APEX starter stylesheet (apex-build skill, assets/starter/apex/static/__prefix__.css, recoloured to the Parkmed look on 12 Oct 2026) on 23 Nov 2026. The check and the starter both read from here: change a value here, not in the scripts.",
+  "about": "The Parkmed look as numbers, for the check (bun parkmed/check.ts). Colours, type and corners counted from the Parkmed APEX starter stylesheet (apex-build skill, __prefix__.css, recoloured to the Parkmed look on 12 Oct 2026) on 23 Nov 2026; spacing in multiples of 4 on GARO's scale, by the owner's decision of 23 Nov 2026. The starter's styles.css and instructions/rules.md carry the same numbers and the relations between parts: change all three together.",
   "spacing": {
-    "layout": [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 40, 60],
-    "controlsAlso": [3, 5, 7, 9, 11],
-    "snapTo": [0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 40, 60],
-    "notes": "No single 4px base: the stylesheet writes even steps (gap 6 x15, 8 x20, 10 x12, 14 x9, 16 x7). Layout spacing uses the even steps. A control may also use 3, 5, 7, 9 or 11, as the button (7/12), field (7/10, label to box 5), small button (4/9) and note (11/14) classes do. The check counts a box as a control when it is at most two levels deep: it holds text, icons, or boxes that hold only those. A fix snaps to the nearest snapTo step, the smaller one on a tie."
+    "base": 4,
+    "snapTo": [0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64],
+    "notes": "Every padding and gap is a multiple of 4 (the owner, 23 Nov 2026: \"Change the spacing themes to multiples of 4 for both parkmed like Garo\"), on GARO's scale 4, 8, 12, 16, 20, 24, 32, 40, 48, 64 (GARO design.md section 2.3). Lines of 1 to 3 px are strokes, not spaces. The APEX stylesheets of the Parkmed apps still write 6, 10 and 14: a design and its built page differ there until a screen's spaces are moved, as GARO moves its older spaces when a screen is next changed. A fix snaps to the nearest snapTo step, the smaller one on a tie."
   },
   "radius": {
     "allowed": [0, 2, 3, 4, 6],
@@ -59,6 +58,8 @@
       "#e4a5a5"
     ],
     "nearMatch": 14,
-    "notes": "Green #55ae65 is for the wordmark only. Amber (warn) means due soon or below target; red (bad) only critical. A normal state has no colour. Teal is never used."
-  }
+    "notes": "Green #55ae65 is for the wordmark only. Amber (warn) means due soon or below target; red (bad) only critical. A normal state has no colour. Teal is never used.",
+    "tealTo": "#2a62a9"
+  },
+  "look": "Parkmed"
 }

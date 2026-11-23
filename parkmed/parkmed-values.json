@@ -1,0 +1,64 @@
+{
+  "about": "The Parkmed look as numbers. Counted from the Parkmed APEX starter stylesheet (apex-build skill, assets/starter/apex/static/__prefix__.css, recoloured to the Parkmed look on 12 Oct 2026) on 23 Nov 2026. The check and the starter both read from here: change a value here, not in the scripts.",
+  "spacing": {
+    "layout": [0, 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 40, 60],
+    "controlsAlso": [3, 5, 7, 9, 11],
+    "snapTo": [0, 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 40, 60],
+    "notes": "No single 4px base: the stylesheet writes even steps (gap 6 x15, 8 x20, 10 x12, 14 x9, 16 x7). Layout spacing uses the even steps. A control may also use 3, 5, 7, 9 or 11, as the button (7/12), field (7/10, label to box 5), small button (4/9) and note (11/14) classes do. The check counts a box as a control when it is at most two levels deep: it holds text, icons, or boxes that hold only those. A fix snaps to the nearest snapTo step, the smaller one on a tie."
+  },
+  "radius": {
+    "allowed": [0, 2, 3, 4, 6],
+    "notes": "4 x11 and 6 x10 in the stylesheet; every larger radius there is a pill (half the height or more), which the check accepts."
+  },
+  "fontSizes": {
+    "allowed": [10, 10.5, 11, 11.5, 12, 13, 14, 16, 18, 20, 22, 24],
+    "scale": [24, 18, 16, 14, 12],
+    "notes": "The type scale is 24 / 18 / 16 / 14 / 12; 13, 11 and 20 are the stylesheet's detail sizes. Body text is 14, labels and table headers 12, the page title 24 (weight 600)."
+  },
+  "colors": {
+    "tokens": {
+      "ink": "#0d1724",
+      "muted": "#536076",
+      "line": "#dde2ea",
+      "line-strong": "#c7cfdb",
+      "field-line": "#bcc5d3",
+      "sunk": "#f4f6f9",
+      "surface": "#ffffff",
+      "menu": "#f7f8fb",
+      "table-head": "#fafbfc",
+      "accent": "#2a62a9",
+      "accent-hover": "#21508c",
+      "accent-soft": "#e8eff9",
+      "green": "#55ae65",
+      "ok": "#2a7140",
+      "ok-soft": "#e7f4ea",
+      "warn": "#8b5a13",
+      "warn-soft": "#fff7e8",
+      "bad": "#ac3636",
+      "bad-soft": "#fff1f1"
+    },
+    "alsoUsed": [
+      "#21508c",
+      "#c08a2b",
+      "#c3cad6",
+      "#e2e7ef",
+      "#e3e7ee",
+      "#e6eaf1",
+      "#e0e5ed",
+      "#eef1f6",
+      "#f8f9fc",
+      "#fbfcfd",
+      "#8a94a6",
+      "#8494ab",
+      "#7a8497",
+      "#687388",
+      "#93b0da",
+      "#a9c1e3",
+      "#f2caca",
+      "#f0dcb6",
+      "#e4a5a5"
+    ],
+    "nearMatch": 14,
+    "notes": "Green #55ae65 is for the wordmark only. Amber (warn) means due soon or below target; red (bad) only critical. A normal state has no colour. Teal is never used."
+  }
+}

@@ -1,0 +1,127 @@
+/*
+ * Parkmed starter: the shared classes every page of this document uses. Change a class here (or in
+ * Kalka's Assets › Classes) and every layer that has it follows. Values are the Parkmed APEX
+ * stylesheet's (apex-build skill, __prefix__.css); names follow it where Kalka allows one class
+ * per rule (.btn.pri becomes .btn + .pri).
+ * Written for Kalka: one class per rule, align-self: stretch written out (Kalka saves the CSS
+ * default as align to start), padding as longhands, literal colours (Kalka binds them to
+ * the variables), letter-spacing in px, lines as inset shadows (Kalka keeps a border only on all
+ * four sides), lines drawn inside the box (outline), so every box keeps APEX's size while its
+ * content sits 1px nearer the edge (fields are 37px tall, as APEX's are), modifiers as their own
+ * classes (.pill-ok, not .ok: Kalka cannot scope a class to .pill), no margins (a group carries
+ * the spacing APEX gets from margins), and a box that holds one text is marked
+ * data-kalka-type="frame" in the page.
+ */
+
+/* The shell: white 60px top bar, light grey menu, content. */
+.artboard { display: flex; flex-direction: column; background-color: #FFFFFF; }
+.topbar { display: flex; align-items: center; gap: 16px; height: 60px; padding-left: 20px; padding-right: 20px; background-color: #FFFFFF; box-shadow: inset 0 -1px 0 0 #DDE2EA; align-self: stretch; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.wordmark { display: flex; align-items: center; }
+.wm-park { color: #55AE65; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; line-height: 24px; }
+.wm-med { color: #2A62A9; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 700; line-height: 24px; }
+.product { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px; }
+.crumb { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 20px; }
+.divider { width: 1px; height: 20px; background-color: #DDE2EA; }
+.shell { display: flex; align-items: stretch; align-self: stretch; flex-grow: 1; }
+.menu { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; width: 216px; padding-top: 12px; padding-right: 12px; padding-bottom: 12px; padding-left: 12px; background-color: #F7F8FB; box-shadow: inset -1px 0 0 0 #DDE2EA; align-self: stretch; }
+.menu-groups { display: flex; flex-direction: column; gap: 16px; align-self: stretch; }
+.menu-group { display: flex; flex-direction: column; gap: 2px; align-self: stretch; }
+.menu-title { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; letter-spacing: 0.48px; text-transform: uppercase; }
+.menu-head { display: flex; padding-left: 10px; padding-bottom: 4px; align-self: stretch; }
+.menu-item { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 32px; padding-left: 10px; padding-right: 10px; border-radius: 16px; align-self: stretch; }
+.menu-label { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 20px; }
+.current { background-color: #2A62A9; }
+.current-label { color: #FFFFFF; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; line-height: 20px; }
+.badge { display: flex; align-items: center; height: 20px; padding-left: 7px; padding-right: 7px; border-radius: 10px; background-color: #FFFFFF; outline: 1px solid #C7CFDB; outline-offset: -1px; }
+.badge-n { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; line-height: 18px; }
+.scope { display: flex; flex-direction: column; gap: 2px; padding-top: 10px; padding-left: 10px; box-shadow: inset 0 1px 0 0 #DDE2EA; align-self: stretch; }
+.scope-name { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; }
+.scope-role { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.content { display: flex; flex-direction: column; gap: 18px; flex-grow: 1; padding-top: 24px; padding-right: 24px; padding-bottom: 24px; padding-left: 24px; align-self: stretch; }
+
+/* Page head: title and a line under it on the left, the page's actions on the right. The filter
+   panel sits 28 under it (APEX: 18 + its own 10), so the two are grouped. */
+.head-block { display: flex; flex-direction: column; gap: 28px; align-self: stretch; }
+.phead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; align-self: stretch; }
+.phead-text { display: flex; flex-direction: column; gap: 6px; }
+.title { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 24px; font-weight: 600; line-height: 31.2px; letter-spacing: -0.4px; }
+.lede { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.h2 { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 18px; font-weight: 600; line-height: 27px; }
+.small { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+
+/* Buttons: white with a grey line, or Parkmed blue for the one main action. */
+.btn { display: flex; align-items: center; justify-content: center; min-height: 36px; padding-top: 7px; padding-right: 12px; padding-bottom: 7px; padding-left: 12px; border-radius: 4px; background-color: #FFFFFF; outline: 1px solid #C7CFDB; outline-offset: -1px; }
+.btn-label { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.pri { background-color: #2A62A9; outline-color: #2A62A9; }
+.pri-label { color: #FFFFFF; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.danger-label { color: #AC3636; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.link { color: #2A62A9; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+
+/* Fields: label above, the box, a message under it (green when saved, red on an error). */
+.inline-form { display: flex; flex-wrap: wrap; align-items: flex-end; row-gap: 10px; column-gap: 12px; padding-top: 12px; padding-right: 12px; padding-bottom: 12px; padding-left: 12px; border-radius: 6px; background-color: #F4F6F9; align-self: stretch; }
+.f { display: flex; flex-direction: column; gap: 5px; }
+.f-label { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.inp { display: flex; align-items: center; min-height: 37px; padding-top: 7px; padding-right: 10px; padding-bottom: 7px; padding-left: 10px; border-radius: 4px; background-color: #FFFFFF; outline: 1px solid #BCC5D3; outline-offset: -1px; }
+.inp-text { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 21px; }
+.inp-hint { color: #687388; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 21px; }
+.inp-fill { align-self: stretch; }
+.inp-select { justify-content: space-between; gap: 8px; }
+.chev { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 21px; }
+.inp-saved { outline-color: #93B0DA; }
+.err { outline-color: #AC3636; }
+.msg-err { color: #AC3636; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; font-style: normal; }
+.msg-ok { color: #2A7140; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; font-style: normal; }
+.fgrid { display: flex; flex-direction: column; gap: 14px; align-self: stretch; }
+.frow { display: flex; gap: 16px; align-self: stretch; }
+.fill { flex-grow: 1; flex-basis: 0px; }
+.gcard { display: flex; flex-direction: column; gap: 12px; padding-top: 18px; padding-right: 18px; padding-bottom: 18px; padding-left: 18px; border-radius: 6px; outline: 1px solid #DDE2EA; outline-offset: -1px; }
+
+/* Long lists: the count 8 above the table, the pager 10 below it (APEX: 18 less the margins of
+   .grid-meta and .pager). Rows 35px, cells 7 x 10, text 14/1.4.
+   Numbers use tabular figures in the app; Kalka does not keep that setting. */
+.list { display: flex; flex-direction: column; gap: 10px; align-self: stretch; }
+.list-top { display: flex; flex-direction: column; gap: 8px; align-self: stretch; }
+.grid-meta { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; line-height: 18px; }
+.grid { display: flex; flex-direction: column; align-self: stretch; }
+.grid-head { display: flex; background-color: #FAFBFC; box-shadow: inset 0 -1px 0 0 #C7CFDB; align-self: stretch; }
+.grid-row { display: flex; min-height: 35px; box-shadow: inset 0 -1px 0 0 #DDE2EA; align-self: stretch; }
+.sel { background-color: #E8EFF9; }
+.th { display: flex; align-items: center; gap: 4px; min-height: 34px; padding-top: 8px; padding-right: 10px; padding-bottom: 8px; padding-left: 10px; }
+.th-r { justify-content: flex-end; }
+.th-label { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 500; line-height: 18px; }
+.th-on { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; }
+.td { display: flex; align-items: flex-start; padding-top: 7px; padding-right: 10px; padding-bottom: 7px; padding-left: 10px; }
+.td-r { justify-content: flex-end; }
+.sorti { width: 10px; text-align: center; color: #2A62A9; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; }
+.rowlink { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 550; line-height: 19.6px; }
+.cell { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 19.6px; }
+.num { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 19.6px; }
+.mono { color: #0D1724; font-family: Menlo, ui-monospace, SFMono-Regular, monospace; font-size: 12px; line-height: 20px; }
+.pager { display: flex; justify-content: space-between; align-items: center; gap: 16px; align-self: stretch; }
+.pages { display: flex; align-items: center; gap: 4px; }
+.pg { display: flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; padding-left: 10px; padding-right: 10px; border-radius: 4px; background-color: #FFFFFF; outline: 1px solid #C7CFDB; outline-offset: -1px; }
+.pg-n { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 20px; }
+.pg-on { background-color: #2A62A9; outline-color: #2A62A9; }
+.pg-on-n { color: #FFFFFF; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 600; line-height: 20px; }
+.pager-text { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 21px; }
+.pgsep { width: 18px; text-align: center; color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 20px; }
+
+/* Status: coloured words, never a coloured box. A normal state has no colour (.pill alone);
+   .pill + .pill-ok / .pill-warn / .pill-bad are APEX's .pill.ok, .pill.warn, .pill.bad. */
+.pill { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 500; line-height: 18px; }
+.pill-ok { color: #2A7140; }
+.pill-warn { color: #8B5A13; }
+.pill-bad { color: #AC3636; }
+
+/* Notes and labels. */
+.note { display: flex; padding-top: 11px; padding-right: 14px; padding-bottom: 11px; padding-left: 14px; background-color: #FFF7E8; box-shadow: inset 3px 0 0 0 #8B5A13; border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
+.note-info { background-color: #E8EFF9; box-shadow: inset 3px 0 0 0 #2A62A9; }
+.note-text { color: #0D1724; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; line-height: 20px; }
+.loc { display: flex; align-items: center; height: 20px; padding-left: 5px; padding-right: 5px; border-radius: 3px; background-color: #F4F6F9; outline: 1px solid #8494AB; outline-offset: -1px; }
+.loc-text { color: #0D1724; font-family: Menlo, ui-monospace, SFMono-Regular, monospace; font-size: 12px; font-weight: 600; line-height: 18px; letter-spacing: 0.24px; }
+.section { display: flex; flex-direction: column; gap: 6px; }
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.specimens { display: flex; flex-wrap: wrap; align-items: center; row-gap: 8px; column-gap: 24px; }
+.sheet-title { color: #536076; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; font-weight: 600; line-height: 18px; letter-spacing: 0.48px; text-transform: uppercase; }

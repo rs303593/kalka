@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Orders</title>
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="artboard" data-kalka-name="Orders" style="width: 1440px; min-height: 900px">
+    <header class="topbar" data-kalka-name="Top bar">
+      <div class="brand" data-kalka-name="Brand">
+        <div class="wordmark" data-kalka-name="Parkmed"><span class="wm-park">Park</span><span class="wm-med">med</span></div>
+        <span class="product">PO &amp; Invoices</span>
+      </div>
+      <div class="divider" data-kalka-name="Divider"></div>
+      <span class="crumb">Orders</span>
+    </header>
+    <div class="shell" data-kalka-name="Shell">
+      <nav class="menu" data-kalka-name="Menu">
+        <div class="menu-groups" data-kalka-name="Groups">
+          <div class="menu-group" data-kalka-name="Work">
+            <div class="menu-head" data-kalka-type="frame" data-kalka-name="Title"><span class="menu-title">Work</span></div>
+            <a class="menu-item" data-kalka-name="Home" data-kalka-type="frame"><span class="menu-label">Home</span></a>
+            <a class="menu-item current" data-kalka-name="Orders" data-kalka-type="frame"><span class="current-label">Orders</span><div class="badge" data-kalka-type="frame" data-kalka-name="Count"><span class="badge-n">2</span></div></a>
+            <a class="menu-item" data-kalka-name="Invoices" data-kalka-type="frame"><span class="menu-label">Invoices</span><div class="badge" data-kalka-type="frame" data-kalka-name="Count"><span class="badge-n">3</span></div></a>
+            <a class="menu-item" data-kalka-name="Receivables" data-kalka-type="frame"><span class="menu-label">Receivables</span></a>
+          </div>
+          <div class="menu-group" data-kalka-name="Masters">
+            <div class="menu-head" data-kalka-type="frame" data-kalka-name="Title"><span class="menu-title">Masters</span></div>
+            <a class="menu-item" data-kalka-name="Clients" data-kalka-type="frame"><span class="menu-label">Clients</span></a>
+            <a class="menu-item" data-kalka-name="Parkmed entities" data-kalka-type="frame"><span class="menu-label">Parkmed entities</span></a>
+          </div>
+          <div class="menu-group" data-kalka-name="Settings">
+            <div class="menu-head" data-kalka-type="frame" data-kalka-name="Title"><span class="menu-title">Settings</span></div>
+            <a class="menu-item" data-kalka-name="People" data-kalka-type="frame"><span class="menu-label">People</span></a>
+            <a class="menu-item" data-kalka-name="Activity" data-kalka-type="frame"><span class="menu-label">Activity</span></a>
+            <a class="menu-item" data-kalka-name="Getting started" data-kalka-type="frame"><span class="menu-label">Getting started</span><div class="badge" data-kalka-type="frame" data-kalka-name="Count"><span class="badge-n">2</span></div></a>
+          </div>
+        </div>
+        <div class="scope" data-kalka-name="Signed in"><span class="scope-name">Suresh Babu</span><span class="scope-role">Accounts L2 · South</span></div>
+      </nav>
+      <main class="content" data-kalka-name="Content">
+        <div class="head-block" data-kalka-name="Head and filters">
+          <div class="phead" data-kalka-name="Page head">
+            <div class="phead-text" data-kalka-name="Heading"><h1 class="title">Orders</h1><p class="lede">Client orders for the South region. Open an order to raise its invoice.</p></div>
+            <div class="row" data-kalka-name="Actions"><button class="btn" data-kalka-type="frame" data-kalka-name="Download all (Excel)"><span class="btn-label">Download all (Excel)</span></button><button class="btn pri" data-kalka-type="frame" data-kalka-name="New order"><span class="pri-label">New order</span></button></div>
+          </div>
+          <div class="inline-form" data-kalka-name="Filters">
+            <label class="f" data-kalka-name="Search"><span class="f-label">Search</span><div class="inp" data-kalka-type="frame" data-kalka-name="Box" style="width: 352px"><span class="inp-hint">Order, code or client</span></div></label>
+            <label class="f" data-kalka-name="Status filter"><span class="f-label">Status</span><div class="inp inp-select" data-kalka-type="frame" data-kalka-name="Box" style="width: 200px"><span class="inp-text">All statuses</span><span class="chev">▾</span></div></label>
+            <button class="btn" data-kalka-type="frame" data-kalka-name="Clear filters"><span class="btn-label">Clear filters</span></button>
+          </div>
+        </div>
+        <div class="list" data-kalka-name="List">
+          <div class="list-top" data-kalka-name="Count and table">
+            <p class="grid-meta">1–8 of 8 orders, ₹43,44,150.00 in all</p>
+            <div class="grid" data-kalka-name="Orders">
+                <div class="grid-head" data-kalka-name="Header">
+                  <div class="th" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="th-label">Order</span></div>
+                  <div class="th" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="th-label">Code</span></div>
+                  <div class="th" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="th-label">Client</span></div>
+                  <div class="th th-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="th-label">Value</span></div>
+                  <div class="th" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="th-label">Status</span></div>
+                  <div class="th" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="th-on">Due</span><span class="sorti">↑</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00412">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Annual maintenance, imaging suite</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00412</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Northgate Hospital</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹4,72,000.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill pill-warn">Due in 3 days</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">26 Nov 2026</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00411">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Nursing staff, night shifts (Q4)</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00411</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Riverside Clinic</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹12,40,500.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill">Invoiced</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">5 Dec 2026</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00409">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Pathology reagents, monthly</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00409</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Meadow Labs</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹86,250.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill pill-ok">Paid</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">18 Nov 2026</span></div>
+                </div>
+                <div class="grid-row sel" data-kalka-name="Row OR00407">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Mobile medical unit, 6 months</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00407</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Hillcrest Care Home</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹18,00,000.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill">Waiting for verification</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">12 Dec 2026</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00405">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Radiology reporting service</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00405</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Silverline Diagnostics</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹3,15,000.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill pill-bad">Overdue 62 days</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">22 Sep 2026</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00402">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Front desk staffing</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00402</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Oakwood Medical Centre</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹2,64,000.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill">Invoiced</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">9 Dec 2026</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00398">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Biomedical waste handling</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00398</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Harbor Health Trust</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹1,08,400.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill pill-ok">Paid</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">14 Nov 2026</span></div>
+                </div>
+                <div class="grid-row" data-kalka-name="Row OR00396">
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Order" style="flex-grow: 1"><span class="rowlink">Pharmacy stock audit</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Code" style="width: 120px"><span class="mono">OR00396</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Client" style="width: 240px"><span class="cell">Greenfield Pharma</span></div>
+                  <div class="td td-r" data-kalka-type="frame" data-kalka-name="Value" style="width: 160px"><span class="num">₹58,000.00</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Status" style="width: 200px"><span class="pill">Draft</span></div>
+                  <div class="td" data-kalka-type="frame" data-kalka-name="Due" style="width: 120px"><span class="cell">20 Dec 2026</span></div>
+                </div>
+            </div>
+          </div>
+          <div class="pager" data-kalka-name="Pager">
+            <p class="pager-text">Page 1 of 1</p>
+            <div class="pages" data-kalka-name="Pages"><div class="pg" data-kalka-type="frame" data-kalka-name="Previous"><span class="pg-n">‹</span></div><div class="pg pg-on" data-kalka-type="frame" data-kalka-name="Page 1"><span class="pg-on-n">1</span></div><div class="pg" data-kalka-type="frame" data-kalka-name="Next"><span class="pg-n">›</span></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

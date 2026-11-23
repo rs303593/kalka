@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Components</title>
+  <link rel="stylesheet" href="../design-system/tokens.css">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="artboard" data-kalka-name="Components" style="width: 1440px; min-height: 900px; padding-top: 40px; padding-right: 40px; padding-bottom: 40px; padding-left: 40px; gap: 28px">
+    <div class="phead" data-kalka-name="Page head">
+      <div class="phead-text" data-kalka-name="Heading"><h1 class="title">Parkmed components</h1><p class="lede">Copy these into a screen. Each one carries its Parkmed class: change the class (Assets › Classes) and every copy follows.</p></div>
+    </div>
+    <section class="section" data-kalka-name="Buttons">
+      <h5 class="sheet-title">Buttons</h5>
+      <div class="row" data-kalka-name="Buttons row"><button class="btn pri" data-kalka-type="frame" data-kalka-name="Primary"><span class="pri-label">Send for verification</span></button><button class="btn" data-kalka-type="frame" data-kalka-name="Default"><span class="btn-label">Save draft</span></button><button class="btn" data-kalka-type="frame" data-kalka-name="Danger"><span class="danger-label">Cancel order</span></button><span class="link">View the PO copy</span></div>
+      <span class="small">One blue button per screen: the main action. Everything else is white with a grey line.</span>
+    </section>
+    <section class="section" data-kalka-name="Fields" style="width: 1000px">
+      <h5 class="sheet-title">Fields</h5>
+      <div class="frow" data-kalka-name="Fields row"><label class="f fill" data-kalka-name="Filled"><span class="f-label">Client</span><div class="inp inp-fill" data-kalka-type="frame" data-kalka-name="Box"><span class="inp-text">Northgate Hospital</span></div></label><label class="f fill" data-kalka-name="Saved"><span class="f-label">PO date</span><div class="inp inp-fill inp-saved" data-kalka-type="frame" data-kalka-name="Box"><span class="inp-text">21 Nov 2026</span></div><em class="msg-ok">Saved</em></label><label class="f fill" data-kalka-name="Select"><span class="f-label">Cost centre</span><div class="inp inp-fill inp-select" data-kalka-type="frame" data-kalka-name="Box"><span class="inp-text">South · Bengaluru</span><span class="chev">▾</span></div></label><label class="f fill" data-kalka-name="Error"><span class="f-label">PO number</span><div class="inp inp-fill err" data-kalka-type="frame" data-kalka-name="Box"><span class="inp-hint">As printed on the PO</span></div><em class="msg-err">Enter the number printed on the client's PO.</em></label></div>
+    </section>
+    <section class="section" data-kalka-name="Status">
+      <h5 class="sheet-title">Status words</h5>
+      <div class="specimens" data-kalka-name="Status row"><span class="pill">Invoiced</span><span class="pill pill-ok">Paid</span><span class="pill pill-warn">Due in 3 days</span><span class="pill pill-bad">Overdue 62 days</span></div>
+      <span class="small">Colour means something: green done, amber due soon, red critical. A normal state has no colour.</span>
+    </section>
+    <section class="section" data-kalka-name="Labels">
+      <h5 class="sheet-title">Count badge, locator, code, note</h5>
+      <div class="specimens" data-kalka-name="Labels row"><div class="badge" data-kalka-type="frame" data-kalka-name="Count"><span class="badge-n">12</span></div><div class="loc" data-kalka-type="frame" data-kalka-name="Locator"><span class="loc-text">R1-B2-X1</span></div><span class="mono">OR00412</span></div>
+      <div class="stack" data-kalka-name="Notes">
+        <div class="note" data-kalka-type="frame" data-kalka-name="Note" style="width: 760px"><span class="note-text">A note says what to do and where: Clients › Northgate Hospital › Request a change.</span></div>
+        <div class="note note-info" data-kalka-type="frame" data-kalka-name="Info note" style="width: 760px"><span class="note-text">An information note uses Parkmed blue.</span></div>
+      </div>
+    </section>
+    <section class="section" data-kalka-name="Pager">
+      <h5 class="sheet-title">Pager</h5>
+      <div class="pages" data-kalka-name="Pages"><div class="pg" data-kalka-type="frame" data-kalka-name="Previous"><span class="pg-n">‹</span></div><div class="pg" data-kalka-type="frame" data-kalka-name="Page 1"><span class="pg-n">1</span></div><div class="pg pg-on" data-kalka-type="frame" data-kalka-name="Page 2"><span class="pg-on-n">2</span></div><div class="pg" data-kalka-type="frame" data-kalka-name="Page 3"><span class="pg-n">3</span></div><span class="pgsep">…</span><div class="pg" data-kalka-type="frame" data-kalka-name="Page 9"><span class="pg-n">9</span></div><div class="pg" data-kalka-type="frame" data-kalka-name="Next"><span class="pg-n">›</span></div></div>
+    </section>
+  </div>
+</body>
+</html>

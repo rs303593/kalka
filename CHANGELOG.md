@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- Imported HTML keeps the styles its container queries give each layer at the width it is imported at: a menu that an `@container` rule shows is no longer hidden on the canvas, and a grid keeps the columns it has there. This holds for pasted pages, `write_html` and Claude Design projects.
+
 ## 0.2.0-rc.1 — 2026-11-23
 
 ### Added

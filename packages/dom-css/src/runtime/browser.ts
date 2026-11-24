@@ -8,6 +8,11 @@ import type {
   DesignNode,
   LayoutBox
 } from '../types'
+import {
+  containerQueriesApplying,
+  rulesApplyingTo,
+  type ContainedStyleRule
+} from './container-queries'
 import { drawnSVG, readFieldText, SVG_NAMESPACE } from './drawn'
 import { isSafeAttribute, UNSAFE_OR_HIDDEN_TAGS } from './sanitize'
 
@@ -395,16 +400,28 @@ function readableRules(sheet: CSSStyleSheet): CSSRuleList | null {
   }
 }
 
-/** The page's style rules that apply in its window, in the order the cascade reads them. */
+/**
+ * The page's style rules whose media and feature conditions hold in its window, in the order the
+ * cascade reads them. A container query applies or not by the element, so a rule inside
+ * `@container` comes with the queries around it, each listed once in `containerQueries`.
+ */
 function activeStyleRules(root: Document | ShadowRoot, view: Window & typeof globalThis) {
-  const rules: CSSStyleRule[] = []
-  const collect = (list: CSSRuleList) => {
+  const rules: ContainedStyleRule[] = []
+  const containerQueries: string[] = []
+  const queryIndex = (query: string) => {
+    const known = containerQueries.indexOf(query)
+    return known === -1 ? containerQueries.push(query) - 1 : known
+  }
+  const collect = (list: CSSRuleList, containers: readonly number[]) => {
     for (const rule of Array.from(list)) {
-      if (rule instanceof view.CSSStyleRule) rules.push(rule)
+      if (rule instanceof view.CSSStyleRule) rules.push({ rule, containers })
       else if (rule instanceof view.CSSMediaRule) {
-        if (view.matchMedia(rule.conditionText).matches) collect(rule.cssRules)
+        if (view.matchMedia(rule.conditionText).matches) collect(rule.cssRules, containers)
       } else if (rule instanceof view.CSSSupportsRule) {
-        if (view.CSS.supports(rule.conditionText)) collect(rule.cssRules)
+        if (view.CSS.supports(rule.conditionText)) collect(rule.cssRules, containers)
+      } else if (rule instanceof view.CSSContainerRule) {
+        // Its name and its query, as the browser read them.
+        collect(rule.cssRules, [...containers, queryIndex(rule.conditionText)])
       }
     }
   }
@@ -412,9 +429,9 @@ function activeStyleRules(root: Document | ShadowRoot, view: Window & typeof glo
     const owner = sheet.ownerNode
     if (owner instanceof view.Element && owner.hasAttribute(AT_REST_ATTRIBUTE)) continue
     const sheetRules = readableRules(sheet)
-    if (sheetRules) collect(sheetRules)
+    if (sheetRules) collect(sheetRules, [])
   }
-  return rules
+  return { rules, containerQueries }
 }
 
 /**
@@ -512,16 +529,20 @@ function copyComputedStyles(
 
   const origin = content.getBoundingClientRect()
   const root = content.getRootNode()
-  const rules =
+  // Where the measuring page's own stylesheets go, beside the author's.
+  const styleHome = root instanceof view.ShadowRoot ? root : content.ownerDocument.head
+  const styles =
     root instanceof view.Document || root instanceof view.ShadowRoot
       ? activeStyleRules(root, view)
-      : []
+      : { rules: [], containerQueries: [] }
+  const applying = containerQueriesApplying(styleHome, rendered.values(), styles.containerQueries)
   const measured: Array<[DesignElement, Element]> = []
   for (const [index, designElement] of elements.entries()) {
     Reflect.deleteProperty(designElement.attrs, MEASURE_ATTRIBUTE)
     const domElement = rendered.get(String(index))
     if (!domElement) continue
     measured.push([designElement, domElement])
+    const rules = rulesApplyingTo(styles.rules, applying.get(domElement))
     readElementStyle(designElement, domElement, view, rules, options)
   }
 
@@ -529,7 +550,7 @@ function copyComputedStyles(
   // as CSS, and a scaled container's children would otherwise come scaled twice.
   const untransformed = content.ownerDocument.createElement('style')
   untransformed.textContent = UNTRANSFORMED_CSS
-  ;(root instanceof view.ShadowRoot ? root : content.ownerDocument.head).append(untransformed)
+  styleHome.append(untransformed)
   try {
     for (const [designElement, domElement] of measured)
       readElementBoxes(designElement, domElement, origin)

@@ -223,15 +223,31 @@ export async function computedStyleProperties(
   }, properties)
 }
 
-/** Every layer a page imports as, measured at a desktop width, in tree order. */
-export async function publicBrowserHTMLLayers(page: Page, html: string) {
+/** Where the import renders a page to measure it, and how wide. */
+export interface BrowserHTMLLayersOptions {
+  viewportWidth?: number
+  sandbox?: 'shadow-root' | 'iframe'
+}
+
+/**
+ * Every layer a page imports as, in tree order: measured at a desktop width in an iframe, unless
+ * another width or sandbox is given.
+ */
+export async function publicBrowserHTMLLayers(
+  page: Page,
+  html: string,
+  { viewportWidth = 800, sandbox = 'iframe' }: BrowserHTMLLayersOptions = {}
+) {
   await ensureAppPage(page)
   await page.setContent('<main></main>')
 
   return page.evaluate(
-    async ({ sourceHTML, modulePath }) => {
+    async ({ sourceHTML, modulePath, width, sandboxMode }) => {
       const { browserHTMLToSceneGraph } = await import(modulePath)
-      const graph = await browserHTMLToSceneGraph(sourceHTML, { compute: { viewportWidth: 800 } })
+      const graph = await browserHTMLToSceneGraph(sourceHTML, {
+        compute: { viewportWidth: width },
+        sandbox: sandboxMode
+      })
       const layers: Array<{
         name: string
         type: string
@@ -264,6 +280,11 @@ export async function publicBrowserHTMLLayers(page: Page, html: string) {
       for (const pageNode of graph.getPages()) pageNode.childIds.forEach(visit)
       return layers
     },
-    { sourceHTML: html, modulePath: DOM_CSS_BROWSER_MODULE }
+    {
+      sourceHTML: html,
+      modulePath: DOM_CSS_BROWSER_MODULE,
+      width: viewportWidth,
+      sandboxMode: sandbox
+    }
   )
 }
